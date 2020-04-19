@@ -1,4 +1,4 @@
-package com.codenation.demo.user.model;
+package com.codenation.demo.level.model;
 
 import com.codenation.demo.logEvent.model.LogEvent;
 import lombok.AllArgsConstructor;
@@ -8,8 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 import java.util.Set;
 
 @Data
@@ -17,8 +15,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-
-public class User {
+public class Level {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -26,19 +23,9 @@ public class User {
 
     @Column
     @NotNull
-    @Size(max = 25)
-    private String type;
+    private String level;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "level")
     private Set<LogEvent> logEvent;
 
-    @Column
-    @NotNull
-    @Size(max = 100)
-    private String login;
-
-    @Column
-    @NotNull
-    @Size(max = 255)
-    private String password;
 }
