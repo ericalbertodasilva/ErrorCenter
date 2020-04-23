@@ -1,12 +1,9 @@
 package com.codenation.demo.logEvent.model;
 
-import com.codenation.demo.level.model.Level;
 import com.codenation.demo.user.model.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -15,10 +12,6 @@ import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
 @Table(name = "log_event")
 public class LogEvent {
@@ -27,22 +20,24 @@ public class LogEvent {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    @Column
-    @NotNull
-    private Long user;
+    //@JsonManagedReference
+    @JsonIgnore
+    @ManyToOne
+    private User user;
 
-    @Column
-    @NotNull
-    private Long level;
 
-    @Column
     @NotNull
-    @Size(max = 100)
-    private String description;
+    @Size(max = 25)
+    private String level;
 
     @Column
     @NotNull
     @Size(max = 255)
+    private String description;
+
+    @Column
+    @NotNull
+    @Size(max = 500)
     private String log;
 
     @CreatedDate
@@ -52,4 +47,60 @@ public class LogEvent {
     @Column
     @PositiveOrZero
     private Long number;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getLog() {
+        return log;
+    }
+
+    public void setLog(String log) {
+        this.log = log;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Long getNumber() {
+        return number;
+    }
+
+    public void setNumber(Long number) {
+        this.number = number;
+    }
 }

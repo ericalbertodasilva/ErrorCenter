@@ -26,7 +26,8 @@ public class LogEventServiceImpl implements LogEventService {
         PageRequest pageRequest = PageRequest.of(
                 page,
                 size,
-                Sort.by(sortByNameColumn));
+                Sort.Direction.ASC,
+                "id");
 
         return logEventRepository.findAllPagingAndSorting(
                 pageRequest
@@ -44,7 +45,7 @@ public class LogEventServiceImpl implements LogEventService {
         PageRequest pageRequest = PageRequest.of(
                 page,
                 size,
-                Sort.by(sortByNameColumn));
+                Sort.Direction.DESC, "user");
 
         return logEventRepository.findByUserPagingAndSorting(
                 user,
