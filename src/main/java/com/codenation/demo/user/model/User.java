@@ -2,19 +2,26 @@ package com.codenation.demo.user.model;
 
 import com.codenation.demo.logEvent.model.LogEvent;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@EntityListeners(AuditingEntityListener.class)
+@EqualsAndHashCode(of = "id")
 @Table(name = "users")
 public class User implements UserDetails {
 
@@ -66,39 +73,4 @@ public class User implements UserDetails {
         return true;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public List<LogEvent> getLogEvents() {
-        return logEvents;
-    }
-
-    public void setLogEvents(List<LogEvent> logEvents) {
-        this.logEvents = logEvents;
-    }
 }
