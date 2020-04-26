@@ -12,7 +12,7 @@ import java.util.Optional;
 @Repository
 public interface LogEventRepository extends CrudRepository<LogEvent, Long> {
 
-    @Query("SELECT le" +
+    @Query("SELECT le.id, le.user, le.level, le.description, le.createdAt, le.number" +
             " FROM LogEvent le")
     Page<LogEvent> findAllPagingAndSorting(Pageable pageable);
 
@@ -21,53 +21,39 @@ public interface LogEventRepository extends CrudRepository<LogEvent, Long> {
             "WHERE le.id = :id")
     Optional<LogEvent> findById(Long id);
 
-    @Query(value = "select id, user, level, description, created_at, number "+
-            "FROM LOG_EVENT le " +
-            "INNER JOIN USER u " +
-            "ON le.user = u.id " +
-            "where le.user = :user", nativeQuery = true)
+    @Query("SELECT le.id, le.user, le.level, le.description, le.createdAt, le.number" +
+            " FROM LogEvent le" +
+            " WHERE le.user = :user")
     Page<LogEvent> findByUserPagingAndSorting(String user, Pageable pageable);
 
-    @Query(value = "select id, user, level, description, created_at, number "+
-            "from LOG_EVENT le" +
-            "INNER JOIN USER ui" +
-            "ON le.user = ui.id" +
-            "where le.level = :level", nativeQuery = true)
+    @Query("SELECT le.id, le.user, le.level, le.description, le.createdAt, le.number" +
+            " FROM LogEvent le" +
+            " WHERE le.level = :level")
     Page<LogEvent> findByLevelPagingAndSorting(String level, Pageable pageable);
 
-    @Query(value = "select id, user, level, description, created_at, number "+
-            "from LOG_EVENT le" +
-            "INNER JOIN USER ui" +
-            "ON le.user = ui.id" +
-            "where le.description = :description", nativeQuery = true)
+    @Query("SELECT le.id, le.user, le.level, le.description, le.createdAt, le.number" +
+            " FROM LogEvent le" +
+            " WHERE le.description = :description")
     Page<LogEvent> findByDescriptionPagingAndSorting(String description, Pageable pageable);
 
-    @Query(value = "select id, user, level, description, created_at, number "+
-            "from LOG_EVENT le" +
-            "INNER JOIN USER ui" +
-            "ON le.user = ui.id" +
-            "where le.description like %:description", nativeQuery = true)
+    @Query("SELECT le.id, le.user, le.level, le.description, le.createdAt, le.number" +
+            " FROM LogEvent le" +
+            " WHERE le.description like %:description")
     Page<LogEvent> findByDescriptionContainPagingAndSorting(String description, Pageable pageable);
 
-    @Query(value = "select id, user, level, description, created_at, number "+
-            "from LOG_EVENT le" +
-            "INNER JOIN USER ui" +
-            "ON le.user = ui.id" +
-            "where le.log = :log", nativeQuery = true)
+    @Query("SELECT le.id, le.user, le.level, le.description, le.createdAt, le.number" +
+            " FROM LogEvent le" +
+            " WHERE le.log = :log")
     Page<LogEvent> findByLogPagingAndSorting(String log, Pageable pageable);
 
-    @Query(value = "select id, user, level, description, created_at, number "+
-            "from LOG_EVENT le" +
-            "INNER JOIN USER ui" +
-            "ON le.user = ui.id" +
-            "where le.log like %:log", nativeQuery = true)
+    @Query("SELECT le.id, le.user, le.level, le.description, le.createdAt, le.number" +
+            " FROM LogEvent le" +
+            " WHERE le.log like %:log")
     Page<LogEvent> findByLogContainPagingAndSorting(String log, Pageable pageable);
 
-    @Query(value = "select id, user, level, description, created_at, number "+
-            "from LOG_EVENT le" +
-            "INNER JOIN USER ui" +
-            "ON le.user = ui.id" +
-            "where le.number = :number", nativeQuery = true)
+    @Query("SELECT le.id, le.user, le.level, le.description, le.createdAt, le.number" +
+            " FROM LogEvent le" +
+            " WHERE le.number = :number")
     Page<LogEvent> findByNumberPagingAndSorting(Long number, Pageable pageable);
 
 }
