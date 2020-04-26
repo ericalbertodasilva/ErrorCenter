@@ -34,6 +34,7 @@ public class LogEvent {
     //@JsonManagedReference
     @CreatedBy
     @JsonIgnore
+    @NotNull
     @ManyToOne
     private User user;
 

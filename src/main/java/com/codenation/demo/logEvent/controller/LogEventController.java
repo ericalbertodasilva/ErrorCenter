@@ -4,6 +4,7 @@ package com.codenation.demo.logEvent.controller;
 import com.codenation.demo.controller.advice.ResourceNotFoundException;
 import com.codenation.demo.logEvent.model.LogEvent;
 import com.codenation.demo.logEvent.service.LogEventServiceImpl;
+import com.codenation.demo.user.service.UserServiceImpl;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -14,18 +15,27 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/logEvent")
 public class LogEventController {
+
     @Autowired
     private LogEventServiceImpl logEventService;
+
+    @Autowired
+    private UserServiceImpl userService;
 
     @PostMapping()
     @ApiOperation("Register new log event")
     @ApiResponses(value = {@ApiResponse(code = 201, message = "Event log successfully registered")})
-    public ResponseEntity<LogEvent> create(@Valid @RequestBody LogEvent logEvent) {
+    public ResponseEntity<LogEvent> create(@Valid @RequestBody LogEvent logEvent, @RequestHeader(value="login") String login) {
+
+        logEvent.setUser(this.userService.findByLogin(login));
+
         return new ResponseEntity<LogEvent>(
+
                 this.logEventService
                         .save(logEvent),
                 HttpStatus.CREATED);

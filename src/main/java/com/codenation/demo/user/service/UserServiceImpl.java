@@ -1,11 +1,13 @@
 package com.codenation.demo.user.service;
 
+import com.codenation.demo.user.model.User;
 import com.codenation.demo.user.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class UserServiceImpl implements UserDetailsService {
@@ -18,4 +20,7 @@ public class UserServiceImpl implements UserDetailsService {
         return this.userRepository.findByLogin(login);
     }
 
+    public User findByLogin(String login) {
+        return this.userRepository.findByLogin(login);
+    }
 }
