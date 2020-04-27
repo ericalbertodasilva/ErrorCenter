@@ -3,7 +3,6 @@ package com.codenation.demo.logEvent.model;
 import com.codenation.demo.user.model.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -31,10 +30,8 @@ public class LogEvent {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    //@JsonManagedReference
     @CreatedBy
     @JsonIgnore
-    @NotNull
     @ManyToOne
     private User user;
 

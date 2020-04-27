@@ -31,12 +31,13 @@ public class User implements UserDetails {
     private Long id;
 
     private String name;
+
     @JsonIgnore
     private String login;
+
     @JsonIgnore
     private String password;
 
-    //@JsonBackReference
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<LogEvent> logEvents;

@@ -12,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/logEvent")
@@ -27,15 +27,24 @@ public class LogEventController {
     @Autowired
     private UserServiceImpl userService;
 
-    @PostMapping()
+    @Autowired
+    private IAuthenticationFacade authenticationFacade;
+
+    @PostMapping
     @ApiOperation("Register new log event")
     @ApiResponses(value = {@ApiResponse(code = 201, message = "Event log successfully registered")})
-    public ResponseEntity<LogEvent> create(@Valid @RequestBody LogEvent logEvent, @RequestHeader(value="login") String login) {
+    @ResponseBody
+    public ResponseEntity<LogEvent> create(@Valid @RequestBody LogEvent logEvent) {
 
-        logEvent.setUser(this.userService.findByLogin(login));
+        Authentication authentication = authenticationFacade.getAuthentication();
+
+        logEvent.setUser(
+                this.userService.findByLogin(
+                        authentication.getName()
+                )
+        );
 
         return new ResponseEntity<LogEvent>(
-
                 this.logEventService
                         .save(logEvent),
                 HttpStatus.CREATED);
@@ -55,8 +64,7 @@ public class LogEventController {
         @RequestParam(
             value = "sortByNameColumn",
             required = false,
-            defaultValue = "id") String sortByNameColumn)
-    {
+            defaultValue = "id") String sortByNameColumn) {
 
         return this.logEventService
                 .findAllPagingAndSorting(
