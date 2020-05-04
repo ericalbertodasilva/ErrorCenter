@@ -27,9 +27,9 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfo(
-                "Nome",
-                "Descrição",
-                "Versão",
+                "Center Error",
+                "Aplicação rest para registro e acesso a logs de erros registrados por microserviços, para possibilitar o monitoramento e auxiliar na tomada de decisão",
+                "0.0.1",
                 "Termos de serviço",
                 null,
                 "Licença",

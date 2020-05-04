@@ -1,23 +1,35 @@
-# Central de Erros
-### Objetivo
-Em projetos modernos é cada vez mais comum o uso de arquiteturas baseadas em serviços ou microsserviços. Nestes ambientes complexos, erros podem surgir em diferentes camadas da aplicação (backend, frontend, mobile, desktop) e mesmo em serviços distintos. Desta forma, é muito importante que os desenvolvedores possam centralizar todos os registros de erros em um local, de onde podem monitorar e tomar decisões mais acertadas. Neste projeto vamos implementar uma API Rest para centralizar registros de erros de aplicações.
+# Projeto final da Aceleração Java da Codenation.
 
-Abaixo estão os requisitos desta API, o time terá total liberdade para tomar as decisões técnicas e de arquitetura da API, desde que atendam os requisitos abaixo.
+### API - Central de Erros - Backend
 
-###API
-####Tecnologia
-    * Utilizar a tecnologia base da aceleração para o desenvolvimento 
-    (Exemplo: Java, Node.js)
-####Premissas
-    * A API deve ser pensada para atender diretamente um front-end
-    * Deve ser capaz de gravar os logs de erro em um banco de dados relacional
-    * O acesso a ela deve ser permitido apenas por requisições que utilizem um token de acesso válido
-####Funcionalidades
-    * Deve permitir a autenticação do sistema que deseja utilizar a API gerando o Token de Acesso
-    * Pode ser acessado por multiplos sistemas
-    * Deve permitir gravar registros de eventos de log salvando informações de Level(error, warning, info), Descrição do Evento, LOG do Evento, ORIGEM(Sistema ou Serviço que originou o evento), DATA(Data do evento), QUANTIDADE(Quantidade de Eventos de mesmo tipo)
-    * Deve permitir a listagem dos eventos juntamente com a filtragem de eventos por qualquer parâmetro especificado acima
-    * Deve suportar Paginação
-    * Deve suportar Ordenação por diferentes tipos de atributos
-    * A consulta de listagem não deve retornar os LOGs dos Eventos
-    * Deve permitir a busca de um evento por um ID, dessa maneira exibindo o LOG desse evento em específico
+Desenvolvimento de uma aplicação restful para registro e acesso a logs de erros registrados por microserviços, para possibilitar o monitoramento e auxiliar na tomada de decisão.
+
+A aplicação foi desenvolvida em conformidade com as instruções para o projeto final.
+
+### Tecnologia
+
+* Java 1.8
+* Spring Boot 2.2.6.RELEASE
+* Maven 4.0.0
+* PostgreSQL 10.9
+* Swagger 2.9.2
+
+### Instalação
+A aplicação foi configurada pra ser executada por CI via repositoria do github pelo serviço Heroku.
+
+* Instalando o Maven: https://maven.apache.org/install.html
+
+Para testar se a aplicação está em execução, utilizar ferramenta insomnia, a qual pode importar o arquivo insomnia.json.
+
+### Executando via Docker
+* A aplicação foi configurada para possibilitar sua execução via Docker.
+
+### Endpoints
+* Após executar a aplicação, você pode acessar a documentação da API, contendo os endpoints implementados, no endereço https://app-errors-center.herokuapp.com/swagger-ui.html
+
+### Equipe de desenvolvimento
+* Eric Alberto da Silva
+
+### Plataforma	Serviço	Link
+* Heroku	Backend	Sem acesso externo
+* Heroku	Banco de Dados	Sem acesso externo
