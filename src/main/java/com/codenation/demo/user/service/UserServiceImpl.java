@@ -23,4 +23,12 @@ public class UserServiceImpl implements UserDetailsService {
     public User findByLogin(String login) {
         return this.userRepository.findByLogin(login);
     }
+
+    public User findById(Long id){
+        return  this.userRepository.findById(id).get();
+    }
+
+    public User save(User user) {
+        return this.userRepository.save(user);
+    }
 }

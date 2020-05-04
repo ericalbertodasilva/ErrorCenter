@@ -2,10 +2,7 @@ package com.codenation.demo.user.model;
 
 import com.codenation.demo.logEvent.model.LogEvent;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,6 +13,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+@Builder
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

@@ -3,10 +3,7 @@ package com.codenation.demo.logEvent.model;
 import com.codenation.demo.user.model.User;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -17,6 +14,7 @@ import javax.validation.constraints.PositiveOrZero;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
+@Builder
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -53,4 +51,6 @@ public class LogEvent {
 
     @PositiveOrZero
     private Long number;
+
+
 }
